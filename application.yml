@@ -48,10 +48,20 @@ management:
       exposure:
         include: '*'
   metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests=true:
     export:
       prometheus:
         enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
 
+# traceID and spanId are predefined MDC keys - we want the logs to include them
+logging.pattern.level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 # Chaos Engineering
 ---
 spring:
