@@ -60,23 +60,7 @@ management:
     sampling:
       probability: 1.0
 
-# traceID and spanId are predefined MDC keys - we want the logs to include them
+# traceId and spanId are predefined MDC keys - we want the logs to include them
 logging.pattern.level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
-# Chaos Engineering
----
-spring:
-  config:
-    activate:
-      on-profile: chaos-monkey      
-management.endpoint.chaosmonkey.enabled: true
-chaos:
-  monkey:
-    enabled: true
-    watcher:
-      component: false
-      controller: false
-      repository: false
-      rest-controller: false
-      service: false
 
 
